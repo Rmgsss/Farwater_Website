@@ -12,9 +12,9 @@ type RouteContext = {
   params: { id: string };
 };
 
-function ensureAdmin() {
+async function ensureAdmin() {
   const token = cookies().get(ADMIN_SESSION_COOKIE)?.value;
-  if (!verifySessionToken(token)) {
+  if (!(await verifySessionToken(token))) {
     throw new Error("UNAUTHORIZED");
   }
 }
@@ -32,7 +32,7 @@ function normalizeSlug(input: string) {
 
 export async function GET(request: Request, context: RouteContext) {
   try {
-    ensureAdmin();
+    await ensureAdmin();
   } catch (error) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
@@ -56,7 +56,7 @@ export async function GET(request: Request, context: RouteContext) {
 
 export async function PUT(request: Request, context: RouteContext) {
   try {
-    ensureAdmin();
+    await ensureAdmin();
     assertCsrf(request);
   } catch (error) {
     const status = error instanceof Error && error.message === "UNAUTHORIZED" ? 401 : 403;
@@ -133,7 +133,7 @@ export async function PUT(request: Request, context: RouteContext) {
 
 export async function DELETE(request: Request, context: RouteContext) {
   try {
-    ensureAdmin();
+    await ensureAdmin();
     assertCsrf(request);
   } catch (error) {
     const status = error instanceof Error && error.message === "UNAUTHORIZED" ? 401 : 403;

@@ -17,16 +17,16 @@ const ALLOWED_TYPES: Record<string, "jpeg" | "png" | "webp"> = {
   "image/webp": "webp",
 };
 
-function ensureAdmin() {
+async function ensureAdmin() {
   const token = cookies().get(ADMIN_SESSION_COOKIE)?.value;
-  if (!verifySessionToken(token)) {
+  if (!(await verifySessionToken(token))) {
     throw new Error("UNAUTHORIZED");
   }
 }
 
 export async function POST(request: Request) {
   try {
-    ensureAdmin();
+    await ensureAdmin();
     assertCsrf(request);
   } catch (error) {
     const status = error instanceof Error && error.message === "UNAUTHORIZED" ? 401 : 403;
