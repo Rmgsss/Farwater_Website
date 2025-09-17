@@ -1,0 +1,129 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String   @id @default(cuid())
+  email         String?  @unique
+  role          String   @default("member")
+  passwordHash  String
+  twoFASecret   String?
+  twoFAEnabled  Boolean  @default(false)
+  createdAt     DateTime @default(now())
+
+  posts         Post[]
+  mediaUploads  Media[]  @relation("MediaUploader")
+}
+
+model Post {
+  id           String   @id @default(cuid())
+  slug         String   @unique
+  title        String
+  excerpt      String
+  contentMDX   String
+  coverImage   String?
+  gallery      String   @default("[]")
+  tags         String   @default("[]")
+  status       String   @default("draft")
+  publishedAt  DateTime?
+  createdAt    DateTime @default(now())
+
+  authorId     String
+  author       User     @relation(fields: [authorId], references: [id])
+
+  comments     Comment[]
+}
+
+model Comment {
+  id            String   @id @default(cuid())
+  postId        String?
+  topicId       String?
+  authorName    String
+  authorContact String?
+  contentMD     String
+  parentId      String?
+  status        String   @default("pending")
+  ipHash        String
+  createdAt     DateTime @default(now())
+
+  post          Post?    @relation(fields: [postId], references: [id])
+  topic         Topic?   @relation(fields: [topicId], references: [id])
+  parent        Comment? @relation("CommentReplies", fields: [parentId], references: [id])
+  replies       Comment[] @relation("CommentReplies")
+
+  @@index([postId])
+  @@index([topicId])
+  @@index([parentId])
+}
+
+model Topic {
+  id         String   @id @default(cuid())
+  title      String
+  bodyMD     String
+  status     String   @default("open")
+  votes      Int      @default(0)
+  authorName String
+  createdAt  DateTime @default(now())
+
+  comments   Comment[]
+}
+
+model Media {
+  id           String   @id @default(cuid())
+  path         String
+  alt          String?
+  width        Int?
+  height       Int?
+  type         String
+  uploadedById String?
+  uploadedBy   User?    @relation("MediaUploader", fields: [uploadedById], references: [id])
+  createdAt    DateTime @default(now())
+}
+
+model Event {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  startsAt    DateTime?
+  location    String?
+  createdAt   DateTime @default(now())
+}
+
+model Partner {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  website     String?
+  createdAt   DateTime @default(now())
+}
+
+model VolunteerApplication {
+  id        String   @id @default(cuid())
+  name      String
+  contact   String
+  message   String
+  createdAt DateTime @default(now())
+}
+
+model IdeaProposal {
+  id        String   @id @default(cuid())
+  title     String
+  summary   String
+  needs     String?
+  contact   String?
+  createdAt DateTime @default(now())
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  email     String
+  phone     String?
+  social    String?
+  message   String
+  createdAt DateTime @default(now())
+}

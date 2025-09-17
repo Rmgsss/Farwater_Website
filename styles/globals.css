@@ -1,0 +1,126 @@
+﻿@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Manrope";
+  src: url("/fonts/Manrope-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Sturkopf Grotesk";
+  src: url("/fonts/SturkopfGrotesk (Rus by Rigbi).ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "The Youngest Script";
+  src: url("/fonts/the-youngest-script.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Nauryz Red Keds";
+  src: url("/fonts/NauryzRedKeds.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "RS RockStar";
+  src: url("/fonts/RS-extralight.otf") format("opentype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "RS RockStar";
+  src: url("/fonts/RS-regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "RS RockStar";
+  src: url("/fonts/RS-semibold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "RS RockStar";
+  src: url("/fonts/RS-extrabold.otf") format("opentype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  min-height: 100%;
+  scroll-behavior: smooth;
+}
+
+html.light {
+  color-scheme: light;
+}
+
+body {
+  @apply font-body bg-brand-navy text-brand-ice antialiased;
+}
+
+html.light body {
+  @apply bg-white text-brand-navy;
+}
+
+@layer base {
+  * {
+    @apply border-brand-steel;
+  }
+
+  ::selection {
+    @apply bg-brand-sea/60 text-brand-navy;
+  }
+
+  a {
+    @apply text-brand-ice transition-colors duration-200;
+  }
+
+  html.light a {
+    @apply text-brand-deep;
+  }
+
+  a:hover {
+    @apply text-brand-sea;
+  }
+
+  :focus-visible {
+    outline: 2px solid theme("colors.brand-sea");
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .button--ghost {
+    @apply border border-brand-sea text-brand-sea hover:bg-brand-sea/10;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
