@@ -1,6 +1,6 @@
 ﻿import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { createHash } from "crypto";
+import crypto from "node:crypto";
 import { ADMIN_SESSION_COOKIE } from "./constants";
 
 function getAdminSecret(): string {
@@ -13,7 +13,7 @@ function getAdminSecret(): string {
 
 function getSecretHash(): string {
   const secret = getAdminSecret();
-  return createHash("sha256").update(secret).digest("hex");
+  return crypto.createHash("sha256").update(secret).digest("hex");
 }
 
 export function createSessionToken(): string {
