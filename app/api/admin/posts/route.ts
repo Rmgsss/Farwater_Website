@@ -8,9 +8,9 @@ import { verifySessionToken } from "@/lib/auth";
 import { assertCsrf } from "@/lib/csrf";
 import { sanitizeHtml } from "@/lib/sanitize";
 
-function ensureAdmin() {
+async function ensureAdmin() {
   const token = cookies().get(ADMIN_SESSION_COOKIE)?.value;
-  if (!verifySessionToken(token)) {
+  if (!(await verifySessionToken(token))) {
     throw new Error("UNAUTHORIZED");
   }
 }
@@ -26,7 +26,7 @@ function normalizeSlug(input: string) {
 
 export async function POST(request: Request) {
   try {
-    ensureAdmin();
+    await ensureAdmin();
     assertCsrf(request);
   } catch (error) {
     const status = error instanceof Error && error.message === "UNAUTHORIZED" ? 401 : 403;
@@ -114,7 +114,7 @@ export async function POST(request: Request) {
 
 export async function GET() {
   try {
-    ensureAdmin();
+    await ensureAdmin();
   } catch (error) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }

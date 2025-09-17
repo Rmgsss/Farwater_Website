@@ -25,7 +25,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Неверный пароль" }, { status: 401 });
   }
 
-  setAdminSession();
+  await setAdminSession();
 
   return NextResponse.json({ success: true });
 }

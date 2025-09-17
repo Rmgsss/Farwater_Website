@@ -11,7 +11,7 @@ type RouteContext = {
 
 export async function PATCH(request: Request, context: RouteContext) {
   const token = cookies().get(ADMIN_SESSION_COOKIE)?.value;
-  if (!verifySessionToken(token)) {
+  if (!(await verifySessionToken(token))) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
