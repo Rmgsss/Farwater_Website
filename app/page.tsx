@@ -1,113 +1,249 @@
 import Image from "next/image";
+import Link from "next/link";
+import {
+  ArrowRight,
+  CalendarCheck,
+  HeartHandshake,
+  Megaphone,
+  MessageCircle,
+  Palette,
+  Sparkles,
+} from "lucide-react";
+
+const highlights = [
+  {
+    title: "Мероприятия и квесты",
+    description:
+      "Офлайн-встречи, городские приключения и арт-форматы. Мы объединяем людей вокруг смелых идей и любимых вселенных.",
+    icon: CalendarCheck,
+    href: "#events",
+    cta: "Смотреть афишу",
+  },
+  {
+    title: "Медиа и истории",
+    description:
+      "Рассказываем о героях Владивостока, делимся фото с мероприятий и подсвечиваем новые инициативы сообщества.",
+    icon: Megaphone,
+    href: "/posts",
+    cta: "Читать посты",
+  },
+  {
+    title: "Форум и комьюнити",
+    description:
+      "Пространство для общения, быстрых советов и совместных проектов. Тут рождаются идеи будущих событий.",
+    icon: MessageCircle,
+    href: "/forum",
+    cta: "Войти в форум",
+  },
+];
+
+const events = [
+  {
+    title: "Urban Sketch Meet",
+    date: "27 июля, суббота",
+    location: "Центр Владивостока",
+    description:
+      "Выходим на пленэр с художниками и фотографами — делимся материалами, техникой и вдохновением прямо на улицах города.",
+    status: "Регистрация открыта",
+  },
+  {
+    title: "Игровой квиз по аниме",
+    date: "8 августа, четверг",
+    location: "Городская медиатека",
+    description:
+      "Командный баттл по любимым сериалам, манге и OST. Призы, живая музыка и тематическая фотозона.",
+    status: "Скоро анонс",
+  },
+  {
+    title: "Лекторий «Город будущего»",
+    date: "23 августа, пятница",
+    location: "Пространство «Корабль»",
+    description:
+      "Архитекторы, художники и урбанисты обсуждают сценарии развития Владивостока и совместные проекты с жителями.",
+    status: "Ищем спикеров",
+  },
+];
+
+const community = [
+  {
+    title: "Волонтёры и организаторы",
+    description:
+      "Нам нужны руки, головы и сердца для мероприятий, медиа и форума. Заполняйте форму и расскажите о себе.",
+    href: "/join",
+    action: "Стать частью команды",
+    icon: HeartHandshake,
+  },
+  {
+    title: "Партнёры и проекты",
+    description:
+      "Ищем бренды, пространства и образовательные команды, которые разделяют любовь к креативу и городу.",
+    href: "mailto:hello@farvater.example",
+    action: "Написать нам",
+    icon: Sparkles,
+  },
+  {
+    title: "Творческие резиденты",
+    description:
+      "Художники, музыканты, писатели, геймдизайнеры — покажите свои работы и расскажите, как можем помочь.",
+    href: "#",
+    action: "Поддержать инициативу",
+    icon: Palette,
+  },
+];
+
+const stats = [
+  { value: "150+", label: "участников в чатах и на офлайне" },
+  { value: "20", label: "организованных событий за сезон" },
+  { value: "12", label: "партнёров и площадок по всему городу" },
+];
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <div className="flex flex-col gap-24 pb-24">
+      <section className="relative isolate overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/backgrounds/ECOquiz-bg-2a.png"
+            alt="Команда Фарватер Team на мероприятии"
+            fill
+            priority
+            className="object-cover"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-brand-navy/95 via-brand-navy/80 to-brand-deep/80" />
         </div>
-      </div>
-
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
+        <div className="relative mx-auto flex max-w-6xl flex-col gap-10 px-6 pb-24 pt-20 text-center md:pt-32 md:text-left">
+          <p className="text-sm uppercase tracking-[0.35em] text-brand-sea/80">Фарватер Team</p>
+          <h1 className="text-balance font-heading text-4xl leading-tight text-brand-ice sm:text-5xl lg:text-6xl">
+            Делаем город ярче! 🎨 События, гик-культура, креатив тусовки — всё здесь, в Фарватер 𝕋𝕖𝕒𝕞
+          </h1>
+          <p className="mx-auto max-w-3xl text-lg text-brand-ice/80 md:mx-0">
+            Мы объединяем жителей Владивостока и Дальнего Востока, чтобы вместе запускать арт-проекты, фестивали,
+            образовательные программы и добрые инициативы. Подписывайтесь на обновления и присоединяйтесь к движению.
           </p>
-        </a>
+          <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-start">
+            <Link
+              href="/join"
+              className="rounded-full bg-brand-sea px-8 py-3 text-center text-sm font-semibold uppercase tracking-[0.25em] text-brand-navy shadow-lg shadow-brand-deep/40 transition hover:bg-brand-ice"
+            >
+              Присоединиться
+            </Link>
+            <Link
+              href="#support"
+              className="button--ghost rounded-full px-8 py-3 text-center text-sm font-semibold uppercase tracking-[0.25em]"
+            >
+              Поддержать
+            </Link>
+          </div>
+        </div>
+      </section>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+      <section className="mx-auto max-w-6xl px-6" id="support">
+        <div className="grid gap-6 lg:grid-cols-3">
+          {highlights.map(({ title, description, icon: Icon, href, cta }) => (
+            <div
+              key={title}
+              className="group flex flex-col justify-between rounded-3xl border border-brand-deep/50 bg-brand-navy/80 p-8 transition hover:border-brand-sea/70 hover:bg-brand-deep/40"
+            >
+              <div className="flex items-center gap-4">
+                <span className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-sea/20 text-brand-sea">
+                  <Icon className="h-6 w-6" />
+                </span>
+                <h2 className="font-heading text-2xl">{title}</h2>
+              </div>
+              <p className="mt-6 text-sm text-brand-ice/80">{description}</p>
+              <Link
+                href={href}
+                className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-brand-sea transition group-hover:text-brand-ice"
+              >
+                {cta}
+                <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+              </Link>
+            </div>
+          ))}
+        </div>
+      </section>
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
+      <section className="relative isolate bg-brand-deep/20 py-20" id="events">
+        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-brand-navy/80 via-transparent to-transparent" aria-hidden />
+        <div className="relative mx-auto max-w-6xl px-6">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="text-xs uppercase tracking-[0.35em] text-brand-sea/80">Что на горизонте</p>
+              <h2 className="font-heading text-3xl text-brand-ice">Ближайшие события</h2>
+            </div>
+            <Link
+              href="/join"
+              className="inline-flex items-center gap-2 rounded-full border border-brand-sea/60 px-6 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-brand-sea transition hover:border-brand-sea hover:text-brand-ice"
+            >
+              Хочу помочь
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
+            {events.map(({ title, date, location, description, status }) => (
+              <article
+                key={title}
+                className="flex h-full flex-col justify-between rounded-3xl border border-brand-deep/50 bg-brand-navy/80 p-8"
+              >
+                <div>
+                  <p className="text-xs uppercase tracking-[0.35em] text-brand-sea/70">{date}</p>
+                  <h3 className="mt-3 font-heading text-2xl text-brand-ice">{title}</h3>
+                  <p className="mt-2 text-sm text-brand-ice/70">{location}</p>
+                  <p className="mt-4 text-sm text-brand-ice/80">{description}</p>
+                </div>
+                <span className="mt-6 inline-flex w-fit rounded-full bg-brand-sea/15 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-brand-sea">
+                  {status}
+                </span>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+      <section className="mx-auto max-w-6xl px-6">
+        <div className="grid gap-8 lg:grid-cols-[1.2fr_1fr]">
+          <div className="space-y-6">
+            <p className="text-xs uppercase tracking-[0.35em] text-brand-sea/80">Комьюнити</p>
+            <h2 className="font-heading text-3xl text-brand-ice">Каждый может повлиять на маршрут</h2>
+            <p className="text-base text-brand-ice/80">
+              Мы верим в силу коллективного творчества. Делитесь предложениями, проводите собственные активности и помогайте
+              делать город дружелюбнее — мы поддержим ресурсами, людьми и опытом. Начните с простого шага.
+            </p>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {stats.map((item) => (
+                <div key={item.label} className="rounded-3xl border border-brand-deep/50 bg-brand-navy/70 p-6">
+                  <p className="font-heading text-3xl text-brand-sea">{item.value}</p>
+                  <p className="mt-2 text-xs uppercase tracking-[0.3em] text-brand-ice/60">{item.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="space-y-4">
+            {community.map(({ title, description, href, action, icon: Icon }) => (
+              <div
+                key={title}
+                className="group flex flex-col gap-4 rounded-3xl border border-brand-deep/50 bg-brand-navy/80 p-6 transition hover:border-brand-sea/70 hover:bg-brand-deep/40"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-sea/20 text-brand-sea">
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <h3 className="font-heading text-xl text-brand-ice">{title}</h3>
+                </div>
+                <p className="text-sm text-brand-ice/80">{description}</p>
+                <Link
+                  href={href}
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-brand-sea transition group-hover:text-brand-ice"
+                >
+                  {action}
+                  <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
